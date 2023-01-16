@@ -1,20 +1,39 @@
+const keys = [
+	"0",
+	"1",
+	"abc",
+	"def",
+	"ghi",
+	"jkl",
+	"mno",
+	"pqrs",
+	"tuv",
+	"wxyz",
+]
 function letterCombinations(input_digit) {
   //Complete the function
-	const keys = {
-		1: "1",
-		2: "abc",
-		3: "def",
-		4: "ghi",
-		5: "jkl",
-		6: "mno",
-		7: "pqrs",
-		8: "tuv",
-		9: "wxyz",
-		0: "0"
-	}
-	for(key in keys){
-		console.log(keys[key]);
-	}
-}
+  if(input_digit.length == 0) {
+	let bres = [];
+	bres.push("");
+	return bres;
+  }
 
+	// 578
+	let ch = input_digit.slice(0,1); // 5
+	let ros = input_digit.slice(1); // 78
+
+	let rres = letterCombinations(ros);
+	let mres = [];
+
+	for(let i = 0; i < keys[ch].length; i++) {
+		let char = keys[ch][i];
+		for(rstr of rres) {
+			mres.push(char + rstr);
+		}
+	}
+
+	return mres;
+	
+}
+// console.log(letterCombinations("203"));
 module.exports = letterCombinations;
